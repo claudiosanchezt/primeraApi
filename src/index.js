@@ -30,5 +30,5 @@ app.use('/usuario', usuarioRoutes);
 app.use('/auth', loginRoutes);
 
 app.listen(process.env.PORT, () => {
-    console.log("servidor iniciado");
+    console.log(`servidor iniciado, puerto: ${process.env.PORT}`);
 });

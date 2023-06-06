@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 
 const encriptar = ( password ) => {
-    const salt = 10;
+    const salt = 15;
     const encriptado = bcrypt.hashSync(password, salt);
 
     return encriptado;

@@ -94,10 +94,10 @@ const editarUsuario = async (req, res) => {
     const db = await database();
     const sql = `UPDATE usuario SET
                     nombre = '${nombre}',
-                    apellido = '${apellido}'
+                    apellido = '${apellido}',
                     usuario = '${usuario}',
                     password = '${password}',
-                    activo = '${activo}'
+                    activo = ${activo}
                 WHERE id_usuario = ${id}`;
     const [result] = await db.query(sql);
 
