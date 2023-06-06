@@ -64,7 +64,7 @@ const agregarUsuario = async (req, res) => {
         });
     }
 
-    if (!activo) {
+    if (activo === '') {
         return res.status(403).json({
             "msj": "error",
             "error": "el usuario no esta activo"
@@ -101,7 +101,7 @@ const editarUsuario = async (req, res) => {
                 WHERE id_usuario = ${id}`;
     const [result] = await db.query(sql);
 
-    console.log(result);
+    //console.log(result);
 
     res.json({
         "msj": "usuario modificado",
