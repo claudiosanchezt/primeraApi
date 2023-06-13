@@ -6,16 +6,19 @@ const { agregarUsuario,
     obtenerTodo, 
     obtenerUnoSolo } = require('./../controllers/usuario.controller');
 
-const router = Router();
 
-router.get('/', obtenerTodo);
+    const { tengoToken } = require('./../middlewares/auth');
 
-router.get('/:id', obtenerUnoSolo);
-
-router.post('/', agregarUsuario);
-
-router.put('/:id', editarUsuario);
-
-router.delete('/:id', eliminarUsuario);
+    const router = Router();
+    
+    router.get('/', tengoToken, obtenerTodo);
+    
+    router.get('/:id', tengoToken, obtenerUnoSolo);
+    
+    router.post('/', tengoToken, agregarUsuario);
+    
+    router.put('/:id', tengoToken, editarUsuario);
+    
+    router.delete('/:id', tengoToken, eliminarUsuario);
 
 module.exports = router;

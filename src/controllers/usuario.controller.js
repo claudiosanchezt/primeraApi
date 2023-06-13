@@ -1,6 +1,6 @@
 //CST.
 const database = require('./../config/basedatos');
-
+const { encriptar } = require('./../utils/password');
 const obtenerTodo = async (req, res) => {
 
     const db = await database();
@@ -24,12 +24,6 @@ const obtenerUnoSolo = async (req, res) => {
     const resultado = {
         ok: true,
         data: row
-    }
-    if (resultado === '') {
-        return res.status(403).json({
-            "msj": "error",
-            "error": "No Existe informacion"
-        });
     }
 
     res.json(resultado);
@@ -71,14 +65,16 @@ const agregarUsuario = async (req, res) => {
         });
     }
 
+    const passwordhash = encriptar(password);
     const db = await database();
     const sql = `INSERT INTO usuario(nombre, apellido,usuario,password,activo)
-                VALUES('${nombre}', '${apellido}', '${usuario}', '${password}', ${activo})`;
+                VALUES('${nombre}', '${apellido}', '${usuario}', '${passwordhash}', ${activo})`;
     const [result] = await db.query(sql);
 
     if (result.insertId) {
         return res.json({
             "msj": "Usuario Agregado Correctamente",
+            "usuario": result
         });
     }
 
